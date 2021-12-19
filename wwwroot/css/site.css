@@ -5,13 +5,18 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+
 }
 
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
 }
-
+.navbar {
+    background-image: linear-gradient(#fff,#12c2e9);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -59,13 +64,17 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    background-image: linear-gradient(#12c2e9,#c471ed,#f64f59);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
+  border:none;
   line-height: 60px; /* Vertically center the text there */
 }

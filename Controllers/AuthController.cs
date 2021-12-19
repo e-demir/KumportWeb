@@ -56,7 +56,7 @@ namespace KumportWeb.Controllers
         {
             return View(new RegisterViewModel());
         }
-
+        
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
@@ -86,7 +86,6 @@ namespace KumportWeb.Controllers
             {
                 return View();
             }
-        }
-
+        }     
     }
 }

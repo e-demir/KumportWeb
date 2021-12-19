@@ -29,6 +29,10 @@ C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\KumportW
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\KumportWeb.TagHelpers.output.cache
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\KumportWeb.RazorCoreGenerate.cache
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Login.cshtml.g.cs
+C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Register.cshtml.g.cs
+C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Auth\UnAuth.cshtml.g.cs
+C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Posts\AddPost.cshtml.g.cs
+C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Index.cshtml.g.cs
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -41,7 +45,4 @@ C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\KumportW
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\KumportWeb.dll
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\KumportWeb.pdb
 C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\KumportWeb.genruntimeconfig.cache
-C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Posts\AddPost.cshtml.g.cs
-C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Posts\Index.cshtml.g.cs
-C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Auth\Register.cshtml.g.cs
-C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\Auth\UnAuth.cshtml.g.cs
+C:\Users\emrullah.demir\source\repos\KumportWeb\obj\Debug\netcoreapp3.1\Razor\Views\User\Info.cshtml.g.cs

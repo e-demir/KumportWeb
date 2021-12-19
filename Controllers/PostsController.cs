@@ -1,5 +1,6 @@
 ﻿using KumportWeb.Models;
-using Microsoft.AspNetCore.Authorization;
+using Kumport.Common.RequestModels;
+using Kumport.Common.ResponseModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,6 +17,7 @@ namespace KumportWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexAsync()
         {
+            var indexModel = new IndexModel();
             var token = HttpContext.Session.GetString("token");
             if (!string.IsNullOrEmpty(token))
             {
@@ -26,21 +28,39 @@ namespace KumportWeb.Controllers
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-                    var re = await client.GetAsync(url);
-                    var z = re.Content.ReadAsAsync<List<PostModel>>().Result;
-                    var indexModel = new IndexModel();
-                    indexModel.Posts = new List<PostModel>();
-                    indexModel.Posts = z;
-                    indexModel.LoggedUserName = HttpContext.Session.GetString("username");
-                    indexModel.LoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("username"));
+                    var response = await client.GetAsync(url);
+                    try
+                    {
+                        var responseAsModel = response.Content.ReadAsAsync<PostsResponseModel>().Result;
+                        indexModel.Posts = new List<PostModel>();
+                        foreach (var item in responseAsModel.Posts)
+                        {
+                            var model = new PostModel()
+                            {
+                                CreatedOn = item.CreatedOn,
+                                FileType = item.FileType,
+                                Image = item.Image,
+                                PostOwner = item.PostOwner,
+                                PostTitle = item.PostTitle
+                            };
+                            indexModel.Posts.Add(model);
+                        }
+                        //indexModel.Posts = responseAsModel;
+                        indexModel.LoggedUserName = HttpContext.Session.GetString("username");
+                        indexModel.LoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("username"));
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
 
                     return View(indexModel);
-                }                
-                
+                }
+
             }
             else
             {
-                return RedirectToAction("Login", "Auth",new LoginViewModel() {Msg = "Log in to see the posts" });
+                return RedirectToAction("Login", "Auth");
             }
 
 
@@ -68,41 +88,60 @@ namespace KumportWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPost(AddPostViewModel model)
+        public async Task<IActionResult> AddPost(AddPostViewModel model)
         {
+            var requestModel = new AddPostRequestModel();
+            var token = HttpContext.Session.GetString("token");
             if (model.Image != null)
             {
                 if (model.Image.Length > 0)
                 {
-                    //Getting FileName
                     var fileName = Path.GetFileName(model.Image.FileName);
-                    //Getting file Extension
                     var fileExtension = Path.GetExtension(fileName);
-                    // concatenating  FileName + FileExtension
                     var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
-
-                    var post = new PostModel()
-                    {
-                        FileType = fileExtension,
-                        CreatedOn = DateTime.Now,
-                        PostTitle = model.Title,
-                        PostOwner = HttpContext.Session.GetString("username")
-                    };
-
+                    requestModel.FileType = fileExtension;
+                    requestModel.CreatedOn = DateTime.Now;
+                    requestModel.PostTitle = model.Title;
+                    requestModel.PostOwner = HttpContext.Session.GetString("username");
+                    
                     using (var target = new MemoryStream())
                     {
                         model.Image.CopyTo(target);
-                        post.Image = target.ToArray();
+                        requestModel.Image = target.ToArray();
                     }
 
-                    HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("post/add", post).Result;
 
+                    //HttpResponseMessage response = GlobalVariables.WebApiClient.PostAsJsonAsync("post/add", post).Result;
+                    try
+                    {
+                        using (var client = new HttpClient())
+                        {
+                            var url = "https://localhost:44305/api/post/add";
+                            client.DefaultRequestHeaders.Clear();
+                            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                            var response = await client.PostAsJsonAsync(url, requestModel);
+                            var s = response.StatusCode;
 
+                            response.EnsureSuccessStatusCode();
 
+                            if (response.IsSuccessStatusCode)
+                            {
+                                return RedirectToAction("Index");                                
+                            }                                                       
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw new Exception(e.Message);
+
+                    }
+                    
 
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("AddPost");
         }
     }
 }

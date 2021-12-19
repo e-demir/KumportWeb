@@ -6,7 +6,7 @@
     <html>
     <head>
         <meta name="viewport" content="width=device-width" />
-        <title>Login</title>
+        <title>Posts</title>
     </head>
     <body>
         <div class="col-12">
@@ -16,8 +16,9 @@
                 <div class="card-body" style="width:80%!important">
                     <h5 class="card-title" style=" text-align: center;">Welcome - @Model.LoggedUserName</h5>
                     <div class="btn-group d-flex" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary w-100" style="margin:5px"  onclick="@("window.location.href='" + @Url.Action("addpost", "posts") + "'");">New Post <i class="fas fa-edit"></i></button>                     
-                        <button type="button" class="btn btn-secondary w-100" style="margin:5px"  onclick="@("window.location.href='" + @Url.Action("logout", "auth") + "'");">Sign Out <i class="fas fa-sign-out-alt"></i></button>
+                        <button type="button" class="btn btn-secondary w-100" style="margin: 5px; background-color: #f64f59" onclick="@("window.location.href='" + @Url.Action("addpost", "posts") + "'");">New Post <i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-secondary w-100" style="margin: 5px; background-color: #12c2e9" onclick="@("window.location.href='" + @Url.Action("Info", "user") + "'");">My Profile <i class="fas fa-sign-out-alt"></i></button>
+                        <button type="button" class="btn btn-secondary w-100" style="margin:5px" onclick="@("window.location.href='" + @Url.Action("logout", "auth") + "'");">Sign Out <i class="fas fa-sign-out-alt"></i></button>
                     </div>
                 </div>
             </div>
