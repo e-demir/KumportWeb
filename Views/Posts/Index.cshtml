@@ -11,7 +11,7 @@
     <body>
         <div class="col-12">
 
-            <div class="card mb-3" style="align-items:center!important; padding:5px">
+            <div class="card mb-3 alert alert-secondary" style="align-items:center!important; padding:5px">
 
                 <div class="card-body" style="width:80%!important">
                     <h5 class="card-title" style=" text-align: center;">Welcome - @Model.LoggedUserName</h5>
@@ -27,7 +27,7 @@
             {
                 <div class="row">
                     <div class="col-12">
-                        <div class="card mb-3" style="align-items:center!important; padding:5px">
+                        <div class="card mb-3 alert alert-info" style="align-items:center!important; padding:5px">
                             @{
                                 var base64 = Convert.ToBase64String(item.Image);
                                 var Image = String.Format("data:image/gif;base64,{0}", base64);

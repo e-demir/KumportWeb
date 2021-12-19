@@ -10,37 +10,52 @@
 <body>
     <div class="col-12">
 
-        <div class="card mb-3" style="align-items:center!important; padding:5px">
+        <div class="card mb-3 alert alert-secondary" style="align-items:center!important; padding:5px">
 
             <div class="card-body" style="width:80%!important">
                 <h5 class="card-title" style=" text-align: center;">Username - @Model.Username</h5>
                 <h5 class="card-title" style=" text-align: center;">E-Mail - @Model.Email</h5>
                 <div class="btn-group d-flex" role="group" aria-label="Basic example">
-                   <button type="button" class="btn btn-secondary w-100" style="margin:5px" onclick="@("window.location.href='" + @Url.Action("logout", "auth") + "'");">Sign Out <i class="fas fa-sign-out-alt"></i></button>
+                    <button type="button" class="btn btn-warning w-100" style="margin:5px" onclick="@("window.location.href='" + @Url.Action("index", "posts") + "'");">Home Page <i class="fas fa-home"></i></button>
+                    <button type="button" class="btn btn-secondary w-100" style="margin: 5px; background-color: #f64f59" onclick="@("window.location.href='" + @Url.Action("addpost", "posts") + "'");">New Post <i class="fas fa-edit"></i></button>
+
                 </div>
             </div>
         </div>
 
-        @foreach (var item in Model.Posts)
+        @if (Model.Posts.Count > 0)
         {
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-3" style="align-items:center!important; padding:5px">
-                        @{
-                            var base64 = Convert.ToBase64String(item.Image);
-                            var Image = String.Format("data:image/gif;base64,{0}", base64);
-                        }
-                        <img src="@Image" class="card-img-top" style="max-width: 50%" alt="...">
+            @foreach (var item in Model.Posts)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-3 alert alert-info" style="align-items:center!important; padding:5px">
+                            @{
+                                var base64 = Convert.ToBase64String(item.Image);
+                                var Image = String.Format("data:image/gif;base64,{0}", base64);
+                            }
+                            <img src="@Image" class="card-img-top" style="max-width: 50%" alt="...">
 
-                        <div class="card-body">
-                            <h5 class="card-title">@item.PostTitle</h5>
-                            <p class="card-text">@item.PostOwner</p>
-                            <p class="card-text"><small class="text-muted"> @item.CreatedOn</small></p>
+                            <div class="card-body">
+                                <h5 class="card-title">@item.PostTitle</h5>
+                                <p class="card-text">@item.PostOwner</p>
+                                <p class="card-text"><small class="text-muted"> @item.CreatedOn</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            }}
+        else
+        {
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Share with us!</h4>
+                <p>It seems you have not shared anything with the community yet. Take your first step and let us know about you.</p>
+                <hr>
+                <p class="mb-0">Remember, Love grows when shared &#128151; &#128151;</p>
             </div>
         }
+
+
 
 
 
